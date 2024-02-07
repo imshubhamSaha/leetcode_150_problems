@@ -1,0 +1,37 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+const searchMajority = (arr) => {
+    let cnt =0, majority = -1;
+
+    for (let i=0; i<arr.length; i++) {
+        if (cnt === 0){
+            majority = arr[i];
+            cnt++;
+        }
+        else {
+            if (arr[i] === majority) 
+                cnt++;
+            else cnt--;
+        }
+
+    }
+
+    return majority;
+}
+
+const isMajority = (key, nums) => {
+    const [cnt] = nums.reduce((acc, curr) => {
+        if (curr === acc[1]) { 
+            acc[0]++
+        }
+        return acc;    
+    }, [0, key]);
+
+    return cnt > (nums.length/2) ? key : -1;
+}
+
+var majorityElement = function(nums) {
+   return isMajority(searchMajority(nums),nums);
+};
