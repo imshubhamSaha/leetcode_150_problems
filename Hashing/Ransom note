@@ -1,0 +1,21 @@
+/**
+ * @param {string} ransomNote
+ * @param {string} magazine
+ * @return {boolean}
+ */
+var canConstruct = function(rN, mag) {
+    const charHash = new Array(26).fill(0);
+
+    for (let i=0; i < mag.length; i++) 
+        charHash[mag[i].charCodeAt(0) - 'a'.charCodeAt(0)]++;
+    
+    for (let char of rN) {
+        let ch = char.charCodeAt(0)- 'a'.charCodeAt(0);
+        if (charHash[ch] === 0) {
+            return false;
+        }
+        charHash[ch]--;
+    }
+
+    return true;
+};
