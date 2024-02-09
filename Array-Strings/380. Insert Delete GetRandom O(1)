@@ -1,0 +1,42 @@
+class RandomizedSet {
+    constructor() {
+        this.vector = [];
+        this.len = 0;
+        this.hashTable = new Map();
+    }
+
+    //////////////////METHODS///////////////////////////
+    find(val){
+        return this.hashTable.has(val)
+    }
+
+    insert(val) {
+        if (this.find(val))
+            return false;
+        this.vector.push(val);
+        this.hashTable.set(val, this.len++);
+        return true;
+    }
+
+    remove(val) {
+        if (!this.hashTable.has(val)) 
+            return false;
+        const idx = this.hashTable.get(val);
+        this.vector[idx] = this.vector[--this.len];
+        this.hashTable.set(this.vector[idx] , idx);
+        this.vector.pop();
+        this.hashTable.delete(val);
+        return true;
+    }
+
+    getRandom(){
+        if (!this.hashTable.size) 
+            return false;
+   
+        const rndmIdx = Math.floor(Math.random()*this.len);
+        return this.vector[rndmIdx];
+    }
+
+}
+
+
