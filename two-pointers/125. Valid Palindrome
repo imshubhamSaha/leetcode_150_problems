@@ -1,0 +1,70 @@
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function (s) {
+    const len = s.length;
+
+    let start = 0, end = len - 1;
+
+    while (start < end) {
+        let code_1 = s[start].charCodeAt(0), code_2 = s[end].charCodeAt(0);
+        if (!(code_1 >= 48 && code_1 <=57) && !(code_1 >= 97 && code_1 <= 122) && !(code_1 >= 65 && code_1 <= 90)) {
+            start++;
+            continue;
+        }
+        if (!(code_2 >= 48 && code_2 <=57) && !(code_2 >=97 && code_2 <=122) && !(code_2 >=65 && code_2 <=90)) {
+           end--;
+           continue;
+        }    
+
+        if ((code_1 >= 97 && code_1 <= 122) && (code_2 >=97 && code_2 <=122)) {
+            if ((code_1 - 97) !== (code_2-97))
+                return false;
+            
+            start++;
+            end--;
+        }
+        else if ((code_1 >= 65 && code_1 <= 90) && (code_2 >=65 && code_2 <=90)) {
+             if ((code_1 - 65) !== (code_2-65))
+                return false;
+            
+            start++;
+            end--;
+        }
+        else if ((code_1 >= 97 && code_1 <= 122) && (code_2 >=65 && code_2 <=90)) {
+             if ((code_1 - 97) !== (code_2-65))
+                return false;
+            
+            start++;
+            end--;
+        }
+        else if ((code_1 >= 65 && code_1 <= 90) && (code_2 >=97 && code_2 <=122)) {
+            if ((code_1 - 65) !== (code_2-97))
+                return false;
+            
+            start++;
+            end--;
+        }
+        else if (code_1 >= 48 && code_1 <= 57) {
+            if (!(code_2 >= 48 && code_2 <= 57) || (code_1 - 48) !== (code_2 - 48))  {
+                return false; 
+            }
+
+            start++;
+            end--;
+        }
+        else if (code_2 >= 48 && code_2 <= 57) {
+            if (!(code_1 >= 48 && code_1 <= 57) || (code_2 - 48) !== (code_1 - 48))  {
+                return false; 
+            }
+
+            start++;
+            end--;
+        }
+        else {
+            return false
+        }
+    }
+    return true;
+};
