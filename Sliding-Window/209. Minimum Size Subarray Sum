@@ -1,0 +1,22 @@
+/**
+ * @param {number} target
+ * @param {number[]} nums
+ * @return {number}
+ */
+var minSubArrayLen = function(target, nums) {
+    const len = nums.length;
+    let miniLen = Number.MAX_SAFE_INTEGER;
+    let sum =0;
+    let left = 0, right = 0;
+
+    while (right < len) {
+        sum += nums[right];
+        while (left <= right && sum >= target) {
+            miniLen = Math.min(miniLen , ((right-left)+1));
+            sum -= nums[left++]
+        }
+        right++;
+    }
+
+    return miniLen === Number.MAX_SAFE_INTEGER ? 0 : miniLen;
+};
