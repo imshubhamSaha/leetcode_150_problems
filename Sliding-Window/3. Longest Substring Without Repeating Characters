@@ -1,0 +1,30 @@
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+    const len = s.length;
+
+    if (len === 0 || len === 1)
+        return len;
+
+    const charArray = new Set();
+
+    let start = 0, pointer =0;
+    let maxLen = 0;
+    while (start < len) {
+        
+        if (charArray.has(s[start])) {
+            maxLen = Math.max(charArray.size, maxLen);
+            
+            while (pointer < start && s[pointer] !== s[start]) {
+                charArray.delete(s[pointer++]);
+            }
+            charArray.delete(s[pointer++]);
+        }
+        charArray.add(s[start]);
+        start++;
+    }
+
+    return charArray.size > maxLen ? charArray.size:maxLen;
+};
