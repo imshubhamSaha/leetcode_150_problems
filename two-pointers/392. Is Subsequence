@@ -1,0 +1,20 @@
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+const is_Subsequence = (s, t, m, n) => {
+    if (m === 0) return true;
+
+    if (n === 0) return false;
+
+    if (s[m-1] === t[n-1]) 
+        return is_Subsequence(s, t, m-1,n-1);
+
+    return is_Subsequence(s, t, m, n-1);
+}
+
+var isSubsequence = function(s, t) {
+    const m = s.length, n = t.length;
+    return is_Subsequence(s,t,m,n)
+};
