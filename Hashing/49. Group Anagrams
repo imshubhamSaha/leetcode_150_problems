@@ -1,0 +1,43 @@
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+const getStr = (str) => {
+    const charArray = new Array(26).fill(0);
+
+    for (let i=0; i<str.length; i++) {
+        charArray[str[i].charCodeAt(0)- 97]++;
+    }
+
+    const res = charArray.reduce((acc,curr, i) => {
+        if (curr !== 0) {
+            acc += (String.fromCharCode(i+97)) + curr
+        }
+        return acc;
+    },"")
+
+    return res;
+
+}
+
+var groupAnagrams = function(strs) {
+    const len = strs.length
+    if (len === 1)
+        return [[strs[0]]];
+
+    const anagrams = new Map(), result = [];
+
+    for (let char of strs) {
+        let charRep = getStr(char);
+        
+        if(!anagrams.has(charRep))
+            anagrams.set(charRep, []);
+
+        anagrams.get(charRep).push(char);
+    }
+
+
+    anagrams.forEach((val) => result.push(val));
+
+    return result;
+};
