@@ -1,0 +1,41 @@
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var decodeString = function(s) {
+    const len = s.length;
+
+    let i = len -1;
+    const stack = [];
+    while (i >= 0) {
+        let code = s[i].charCodeAt(0);
+        if(code >= 48 && code <= 57) {
+
+          let num = "" ;
+          while (i >=0 && s[i].charCodeAt(0) >= 48 && s[i].charCodeAt(0) <= 57) {
+            num = s[i] + num;
+            i--;
+          }
+          let rep = num - "0";
+          stack.pop();
+          let str = ""
+          while (stack.length && stack[stack.length-1] != "]") {
+            str += stack.pop();
+          }
+          stack.pop();
+          let res = str.repeat(rep);
+          stack.push(res);
+        }else {
+          stack.push(s[i]);
+          i--;
+        }
+        
+    }
+
+    let result = ""
+
+    while (stack.length) 
+      result += stack.pop();
+
+    return result;
+};
