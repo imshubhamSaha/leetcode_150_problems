@@ -1,0 +1,22 @@
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+  const len = prices.length;
+  let buy = 0;
+  let sell = 0;
+  profit = 0;
+
+  for (let i =1; i < len; i++) {
+    if(prices[i] >= prices[sell]) {
+      sell = i;
+    }else {
+      profit += prices[sell] - prices[buy];
+      buy = i;
+      sell = i;
+    }
+  }
+  profit += prices[sell] - prices[buy];
+  return profit;
+};
