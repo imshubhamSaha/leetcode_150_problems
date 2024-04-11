@@ -1,0 +1,23 @@
+class Solution {
+    static String binToGrey(String B) {
+        String grayCode = "";
+        int n = B.length();
+        grayCode += B.charAt(0);
+        
+        for(int i = 1; i < n; i++) {
+            grayCode += B.charAt(i) ^ B.charAt(i-1);
+        }
+        
+        return grayCode;
+    }
+    static String greyToBin(String G) {
+        String binaryCode ="";
+        int n = G.length();
+        binaryCode += G.charAt(0);
+        for (int i = 1; i < n; i++) {
+            binaryCode += binaryCode.charAt(i-1) ^ G.charAt(i);
+        }
+        
+        return binaryCode;
+    }
+};
