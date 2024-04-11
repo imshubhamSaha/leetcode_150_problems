@@ -1,0 +1,15 @@
+class Solution {
+    toDecimal(str) {
+        let res = 0;
+        let power = 0;
+        
+        while (str) {
+            if(str % 10 === 1) {
+                res += (1 << power);
+            }
+            power++;
+            str = Math.floor(str/10);
+        }
+        return res;
+    }
+}
