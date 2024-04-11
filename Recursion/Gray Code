@@ -1,0 +1,23 @@
+class Solution {
+    
+    graycode(n)
+    {
+        if ( n === 1) {
+            const bRes = ["0", "1"];
+            return bRes;
+        }
+        
+        let rRes = this.graycode(n-1);
+        let mRes = [];
+        
+        for (let i =0; i < rRes.length; i++) {
+            mRes.push("0" + rRes[i]);
+        }
+        
+        for (let i = rRes.length-1; i >= 0; i--) {
+            mRes.push("1" + rRes[i]);
+        }
+        
+        return mRes;
+    }
+}
