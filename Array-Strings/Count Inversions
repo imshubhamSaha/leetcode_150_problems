@@ -1,0 +1,52 @@
+class Solution {
+    merge(arr,start, mid, end) {
+        const len = end - start + 1;
+        
+        const temp = new Array(len).fill(0);
+        let i = start;
+        let j = mid + 1;
+        let k = 0;
+        let cnt = 0;
+        
+        while(i <= mid && j <= end) {
+            if(arr[i] <= arr[j]) 
+                temp[k++] = arr[i++];
+            else {
+                cnt += (mid - i + 1);
+                temp[k++] = arr[j++];
+            }
+        }
+        
+        while(i <= mid) {
+            temp[k++] = arr[i++];
+        }
+        
+        while (j <= end) {
+            temp[k++] = arr[j++];
+        }
+        
+        for (let p =0; p < len; p++) {
+            arr[start + p] = temp[p];
+        }
+        
+        return cnt;
+    }
+    
+    mergeSort(arr, start, end) {
+        if(start >= end) 
+            return 0;
+        
+        let mid = start + Math.floor((end-start)/2);
+        let cnt1 = this.mergeSort(arr, start, mid);
+        let cnt2 = this.mergeSort(arr, mid + 1, end);
+        
+        let cnt3 = this.merge(arr,start, mid, end);
+        
+        return (cnt1 + cnt2 + cnt3);
+    }
+    // Function to count inversions in the array.
+    inversionCount(arr, n)
+    {
+        return this.mergeSort(arr, 0, n-1);
+    }
+}
