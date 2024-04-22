@@ -1,0 +1,27 @@
+class Solution {
+    //Function to count zeroes in the given array.
+    countZero(n, k, arr)
+    {
+        const visitedRow = new Set();
+        const visitedCol = new Set();
+        let totalZero = n * n;
+        const res = [];
+        
+        for(let i = 0; i < k; i++) {
+            let [row, col] = arr[i];
+            if(!visitedRow.has(row)) {
+                totalZero =(totalZero - n) + visitedCol.size;
+            }
+            visitedRow.add(row);
+            
+            if(!visitedCol.has(col)) {
+                totalZero =(totalZero -  n) + visitedRow.size;
+            }
+            visitedCol.add(col);
+            res.push(totalZero);
+            
+        }
+        
+        return res;
+    }
+}
