@@ -1,0 +1,96 @@
+/**
+ * @param {number[]} asteroids
+ * @return {number[]}
+ */
+var asteroidCollision = function(asteroids) {
+    const moving_right = [];
+    const n = asteroids.length;
+
+    for (let i = 0; i < n; i++) {
+        const ast = asteroids[i]
+        const size = Math.abs(ast);
+        const direction = ast > 0 ? "R" : "L";
+        if (direction === "R") {
+            moving_right.push(i);
+            continue;
+        }
+        while (moving_right.length && asteroids[moving_right[moving_right.length - 1]] <= size) {
+            let idx = moving_right.pop();
+            if (asteroids[idx] === size ) {
+                asteroids[idx] = 0;
+                asteroids[i] = 0;
+                break;
+            }
+            asteroids[idx] = 0
+        }
+
+        if (moving_right.length && asteroids[moving_right[moving_right.length - 1]] > size) 
+            asteroids[i] = 0;
+           
+    }
+    
+    return asteroids.filter(size => size !== 0);
+};
+
+/**
+ *  TIME COMPLEXITY -->> {
+        O(N) * O(LENGTH OF THE STACK) --> FOR TRAVERSING ASTEROIDS ARRAY 
+        O(N) --> FOR FILTERING ASTEROIDS THAT ARE DESTROYED
+
+        OVERALL -->> O(N) * O(LENGTH OF THE STACK) + O(N) = O(N) * O(LENGTH OF THE STACK)
+    }
+
+    SPACE COMPLEXITY -->> {
+        O(N) --> FOR MAINTAINING STACK
+        O(N) --> FOR FILTERED ASTEROIDS
+
+        OVERALL --> O(N) + O(N) = O(N);
+    }
+ */
+
+***************************************************************************************************************************************
+
+/**
+ * @param {number[]} asteroids
+ * @return {number[]}
+ */
+var asteroidCollision = function(asteroids) {
+    const moving_right = [];
+
+    for (const ast of asteroids) {
+        const size = Math.abs(ast);
+        
+        if (ast > 0) {
+            moving_right.push(ast);
+            continue;
+        }
+        while (moving_right.length && moving_right[moving_right.length - 1] > 0 && moving_right[moving_right.length - 1] < size) {
+            moving_right.pop();
+        }
+
+        if (!moving_right.length || moving_right[moving_right.length - 1] < 0)  
+            moving_right.push(ast);
+        else if (moving_right[moving_right.length - 1] === size) 
+            moving_right.pop()    
+           
+    }
+    
+    return moving_right;
+};
+
+/**
+ *  TIME COMPLEXITY -->> {
+        O(N) * O(LENGTH OF THE STACK) --> FOR TRAVERSING ASTEROIDS ARRAY 
+
+        OVERALL -->> O(N) * O(LENGTH OF THE STACK);
+    }
+
+    SPACE COMPLEXITY -->> {
+        O(N) --> FOR MAINTAINING STACK
+
+        OVERALL --> O(N) + O(N) = O(N);
+    }
+ */
+
+
+***************************************************************************************************************************************
