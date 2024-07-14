@@ -1,0 +1,28 @@
+class Solution{
+    rearrange(arr,n){
+        if (n === 1) 
+            return arr;
+       
+        const pos = arr.filter(num => num >=0);
+        const neg = arr.filter((num) => num < 0);
+        let pos_idx = 0;
+        let neg_idx = 0;
+        
+        let  i = 0;
+        
+        while (pos_idx < pos.length && neg_idx < neg.length) {
+            arr[i++] = pos[pos_idx++];
+            arr[i++] = neg[neg_idx++];
+        }
+        
+        while (pos_idx < pos.length) {
+            arr[i++] = pos[pos_idx++]
+        }
+        
+        while (neg_idx < neg.length) {
+            arr[i++] = neg[neg_idx++]
+        }
+        
+        return arr;
+    }
+}
