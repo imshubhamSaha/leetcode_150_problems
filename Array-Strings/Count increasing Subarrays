@@ -1,0 +1,23 @@
+class Solution{
+public:
+
+	int countIncreasing(int arr[], int n) {
+	    int i = 1;
+	    int cnt = 0;
+	    int j = 0;
+	    int k = 0;
+	    
+	    while (i < n) {
+	        if (arr[i] > arr[k]) {
+	            cnt += (i - j);
+	            k = k + 1;
+	        }else {
+	            j = i;
+	            k = i;
+	        }
+	        i++;
+	    }
+	    
+	    return cnt;
+	}
+};
