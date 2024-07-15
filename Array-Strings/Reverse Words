@@ -1,0 +1,9 @@
+class Solution 
+{
+    //Function to reverse words in a given string.
+    reverseWords(s)
+    {
+       s = s.split(".").reverse().join(".");
+       return s;
+    }
+}
