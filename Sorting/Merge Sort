@@ -1,0 +1,63 @@
+/**
+ * @param {number[]} arr
+ * @param {number} l
+ * @param {number} r
+ */
+
+class Solution
+{
+    merge(arr, left, mid, right)
+    {
+        let n = (mid - left) + 1;
+        let m = right - mid;
+        const left_arr = new Array(n).fill(0);
+        const right_arr = new Array(m).fill(0);
+        
+        for (let i = 0; i < n; i++) 
+            left_arr[i] = arr[left + i];
+            
+        for (let j = 0; j < m; j++) 
+            right_arr[j] = arr[mid + 1 + j];
+            
+        let left_idx = 0;
+        let right_idx = 0;
+        let idx = left;
+        
+        while (left_idx < n && right_idx < m) {
+            if (left_arr[left_idx] <= right_arr[right_idx]) {
+                arr[idx] = left_arr[left_idx];
+                left_idx++;
+            }    
+            else {
+                arr[idx] = right_arr[right_idx];
+                right_idx++;
+            }
+            idx++;
+        }
+        
+        while (left_idx < n) {
+            arr[idx] = left_arr[left_idx];
+            left_idx++;
+            idx++;
+        }    
+            
+        while (right_idx < m) {
+            arr[idx] = right_arr[right_idx];
+            right_idx++;
+            idx++;
+        }
+        
+    }
+    
+    mergeSort(arr, left, right){
+        
+        if (left >= right) 
+            return;
+        
+        let mid = left + Math.floor((right - left)/2);
+        this.mergeSort(arr,left,mid);
+        this.mergeSort(arr,mid+1, right);
+        this.merge(arr,left,mid,right);
+    }
+    
+}
