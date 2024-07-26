@@ -1,0 +1,28 @@
+class Solution {
+  longestSubstrDistinctChars(s) {
+        const n = s.length;
+        const char_set = new Set();
+        let i = 0;
+        let j = 0;
+        let max_len = 0;
+        let dist_len = 0;
+        
+        while (j < n) {
+            if (!char_set.has(s[j])) {
+                char_set.add(s[j]);
+                dist_len++;
+            }else {
+                while (i < j && s[i] !== s[j]) {
+                    char_set.delete(s[i])
+                    i++;
+                }
+                i++;
+                dist_len = char_set.size;
+            }  
+            max_len = Math.max(char_set.size, max_len);
+            j++;
+        }
+        
+        return max_len;
+  }
+}
