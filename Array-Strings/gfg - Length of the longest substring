@@ -1,0 +1,27 @@
+class Solution {
+    longestUniqueSubsttr(str){
+        const n = str.length;
+        const char = new Array(26).fill(false);
+        let i = 0;
+        let j = 0;
+        let max_len = 0;
+        
+        while (j < n) {
+            const ch = str[j].charCodeAt(0);
+            if (!char[ch - 97]) {
+                char[ch-97] = true;
+            }else {
+                while (i < j && str[i] !== str[j]) {
+                    char[str[i].charCodeAt(0) - 97] = false;
+                    i++;
+                }
+                i++;
+            }
+            
+            max_len = Math.max(max_len, (j -i) + 1);
+            j++;
+        }
+        
+        return max_len;
+    }
+}
