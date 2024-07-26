@@ -1,0 +1,27 @@
+class Solution
+{
+  public:
+    string arrangeString(string str)
+    {
+        int n = str.length();
+        vector<int> char_arr(26, 0);
+        int sum = 0;
+
+        for (int i = 0; i < n; ++i) {
+            char char_code = str[i];
+            if (char_code >= '0' && char_code <= '9') {
+                sum += char_code - '0';
+            } else {
+                char_arr[char_code - 'A']++;
+            }
+        }
+
+        string result = "";
+        for (int i = 0; i < 26; ++i) {
+            result += string(char_arr[i], 'A' + i);
+        }
+
+        if (sum > 0 ) result += to_string(sum);
+        return result;
+    }
+};
