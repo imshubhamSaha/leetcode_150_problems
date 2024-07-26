@@ -1,0 +1,50 @@
+class Solution 
+{
+    //Function to find the first non-repeating character in a string.
+    nonrepeatingCharacter(s)
+    {
+        
+        const n = s.length;
+       
+        for(let i = 0; i < n; i++) {
+            let first_occr = i;
+            for(let j = 0; j < n; j++) {
+                if (s[i] === s[j] && i !== j) {
+                    first_occr = j;
+                    break;
+                }
+            }
+            
+            if (first_occr === i) return s[i];
+        }
+        return "$";
+    }
+}
+TIME COMPLEXITY -->> O(N * N)
+SPACE COMPLEXITY -->> O(1)
+
+________________________________________________________________________________________________________________________________________
+
+class Solution 
+{
+    //Function to find the first non-repeating character in a string.
+    nonrepeatingCharacter(s)
+    {
+        
+        const n = s.length;
+        const char_arr = new Array(26).fill(0);
+        
+        for(let i = 0; i < n; i++) 
+            char_arr[s[i].charCodeAt(0) - 97]++;
+        
+        for(let i = 0; i < n; i++) 
+            if ( char_arr[s[i].charCodeAt(0) - 97] === 1) return s[i];
+            
+        return "$";
+    }
+}
+
+TIME COMPLEXITY -->> O(N)
+SPACE COMPLEXITY -->> O(1)
+
+________________________________________________________________________________________________________________________________________
