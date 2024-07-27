@@ -1,0 +1,46 @@
+class Solution
+{
+  public:
+    string arrangeString(string str, int x, int y)
+    {
+       
+        int zeros = 0;
+        int ones = 0;
+        
+        for (char ch : str) {
+            if (ch == '0') 
+                zeros++;
+            else 
+                ones++;
+        }
+        
+        string res;
+        
+        while (zeros > 0 && ones > 0) {
+            res.append(min(x,zeros), '0'); 
+            res.append(min(y,ones), '1');
+            zeros -= x;
+            ones -= y;
+        }
+        
+        while (zeros > 0) {
+            res.append(min(x,zeros), '0');
+            zeros -= x;
+        }
+        
+        while (ones > 0) {
+            res.append(min(y,ones), '1');
+            ones -= y;
+        }
+        
+        return res;
+    }
+};
+
+TIME COMPLEXITY -->> O(N);
+SPACE COMPLEXITY -->> O(N);
+
+________________________________________________________________________________________________________________________________________
+
+
+
