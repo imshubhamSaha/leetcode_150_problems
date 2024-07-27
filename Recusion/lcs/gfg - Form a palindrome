@@ -1,0 +1,48 @@
+class Solution {
+    findInsertion (str, left, right) {
+        if (left >= right) return 0;
+        
+        if (str[left] === str[right]) 
+            return this.findInsertion(str,left + 1, right-1);
+            
+        return  Math.min(
+        this.findInsertion(str, left, right - 1),
+        this.findInsertion(str, left + 1, right)
+    ) + 1;
+    }
+    findMinInsertions(s)
+    {
+        const n = s.length;
+        return this.findInsertion(s,0,n-1);
+    }
+}
+
+______________________________________________________________________________________________________________________________________________________________________________________
+
+class Solution {
+    lcs(s1,s2, n) {
+        
+        const dp = new Array(n+1).fill(0);
+        
+        for(let i = 1; i <= n; i++) {
+            let prev = 0;
+            for(let j = 1; j <= n; j++) {
+                let curr = dp[j];
+                
+                if (s1[j-1] === s2[i-1]) 
+                    dp[j] = prev + 1;
+                else 
+                    dp[j] = Math.max(dp[j-1],dp[j]);
+                prev = curr;    
+            }
+        }
+        
+        return dp[n];
+    }
+    findMinInsertions(s)
+    {
+        const n = s.length;
+        const rev_str = s.split("").reverse().join("");
+        return n - this.lcs(s,rev_str,n);
+    }
+}
