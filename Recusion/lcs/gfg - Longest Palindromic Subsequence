@@ -1,0 +1,22 @@
+class Solution {
+    lcs(s1,s2,n) {
+        const dp = new Array(n+1).fill(0);
+        
+        for (let i = 1; i <= n; i++) {
+            let prev = 0;
+            for (let j = 1; j <= n; j++) {
+                let curr = dp[j];
+                dp[j] = s1[j-1] === s2[i-1] ? prev + 1 : Math.max(dp[j-1],dp[j]);
+                prev = curr;
+            }
+        }
+        
+        return dp[n];
+    }
+    
+    longestPalinSubseq(s){
+        const n = s.length;
+        const rev_str = s.split("").reverse().join("");
+        
+        return this.lcs(s,rev_str,n);
+    }
