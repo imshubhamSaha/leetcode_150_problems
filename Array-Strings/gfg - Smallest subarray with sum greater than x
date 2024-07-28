@@ -1,0 +1,21 @@
+class Solution {
+    smallestSubWithSum(arr, x) {
+        const n  = arr.length;
+        
+        let i = 0;
+        let j = 0;
+        let sum = 0;
+        let len = Number.MAX_SAFE_INTEGER;
+        while (j < n) {
+            sum += arr[j];
+            
+            while (i <= j && sum > x) {
+                len = Math.min(len, ((j - i) + 1));
+                sum -= arr[i++];
+            }
+            j++;
+        }
+        
+        return len === Number.MAX_SAFE_INTEGER ? 0 : len; 
+    }
+}
