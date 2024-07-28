@@ -1,0 +1,35 @@
+/**
+ * @param {string[]} logs
+ * @return {number}
+ */
+var minOperations = function(logs) {
+    const operations = [];
+
+    for (const oper of logs) {
+        if (oper !== "./" && oper !== "../")
+            operations.push(oper);
+        else if (oper === "../" && operations.length) 
+            operations.pop();    
+    }
+
+    return operations.length;
+};
+
+____________________________________________________________________________________________________________________________________________
+
+/**
+ * @param {string[]} logs
+ * @return {number}
+ */
+var minOperations = function(logs) {
+    let operations = 0;
+
+    for (const oper of logs) {
+        if (oper !== "./" && oper !== "../")
+            operations++;
+        else if (oper === "../" && operations > 0) 
+            operations--;    
+    }
+
+    return operations;
+};
