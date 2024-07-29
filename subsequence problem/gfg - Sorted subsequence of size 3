@@ -1,0 +1,24 @@
+class Solution {
+    find3Numbers(arr) {
+        // code here
+        const n = arr.length
+        
+        const smaller = new Array(n).fill(0);
+        const greater = new Array(n).fill(0);
+        smaller[0] = arr[0];
+        greater[n-1] = arr[n-1];
+        
+        for (let i = 1; i < n; i++) {
+            smaller[i] = Math.min(smaller[i-1],arr[i]);
+            greater[n-1-i] = Math.max(greater[n-i], arr[n-1-i])
+        }
+        
+        for (let i = 1; i < n -1; i++) {
+            if (smaller[i] < arr[i] && greater[i] > arr[i]) 
+                return [smaller[i],arr[i],greater[i]];
+        }
+        
+        return [];
+        
+    }
+}
