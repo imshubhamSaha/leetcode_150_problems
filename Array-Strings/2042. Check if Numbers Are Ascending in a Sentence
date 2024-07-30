@@ -1,0 +1,27 @@
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var areNumbersAscending = function(s) {
+    const n = s.length;
+    let min_num = -1;
+    let i = 0;
+
+    while ( i < n) {
+        const char_code = s[i].charCodeAt(0);
+        if (char_code >= 48 && char_code <= 57) {
+            let num = 0;
+            while (i < n && (s[i].charCodeAt(0) >= 48 && s[i].charCodeAt(0) <= 57)) {
+                num = (num * 10) + s[i].charCodeAt(0);
+                i++;
+            }
+          
+            if (num <= min_num) 
+                return false;
+            min_num = num;    
+        }
+        i++;
+    }
+
+    return true;
+};
