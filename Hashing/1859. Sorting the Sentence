@@ -1,0 +1,32 @@
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var sortSentence = function(s) {
+    const len = s.length;
+    let cnt = 0;
+    const sentence_map = {};
+    let i = len -1;
+
+    while (i >= 0) {
+        const nums = s[i];
+        const temp = i;
+        while (i >= 0 && s[i] !== " ") {
+            i--;
+        }
+        sentence_map[nums] = s.slice(i+1, temp);
+        i--;
+        cnt++;
+    }
+
+    const res = new Array(cnt).fill(0);
+
+    for (let i = 0; i < cnt; i++) {
+        res[i] = sentence_map[i+1];
+    }
+
+    return res.join(" ");
+};
+
+TIME COMPLEXITY -->> O(N)
+SPACE COMPLEXITY -->> O(N)
