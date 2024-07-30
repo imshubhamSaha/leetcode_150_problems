@@ -1,0 +1,25 @@
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var check = function(nums) {
+    const n = nums.length;
+    const check_num = nums[0];
+    let rotated = false;
+
+    for (let i = 1; i < n; i++) {
+        if (nums[i] < nums[i-1] && !rotated) {
+            rotated = true;
+            if (check_num < nums[i]) return false;
+        }
+        else if (rotated && (nums[i] < nums[i -1] ||  nums[i] > check_num))
+            return false;
+    }
+
+    return true;
+};
+TIME COMPLEXITY -->> O(N)
+SPACE COMPLEXITY -->> O(1)
+
+__________________________________________________________________________________________________________________________________________
+
