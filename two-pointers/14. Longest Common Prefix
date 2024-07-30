@@ -1,0 +1,39 @@
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+    strs.sort();
+    const first = strs[0];
+    const last = strs.at(-1);
+    let idx = 0;
+    while (idx < first.length && idx < last.length && first[idx] === last[idx]) 
+        idx++;     
+    
+    return first.slice(0,idx);
+};
+
+
+
+//optimal 
+
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+    const n = strs.length;
+    
+    const s = strs[0];
+    
+
+    for (let i = 0; i < s.length; i++) {
+        for (let j = 1; j < n; j++) {
+            if (i >= strs[j].length || s[i] !== strs[j][i])
+                return s.substring(0,i); 
+        }
+        
+    }
+
+    return s;
+};
