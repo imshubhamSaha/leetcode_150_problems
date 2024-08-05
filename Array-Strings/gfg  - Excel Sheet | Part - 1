@@ -1,0 +1,24 @@
+/**
+ * @param {number} n
+ * @returns {string} 
+ */
+ 
+class Solution {
+    ExcelColumn(n){
+       if ( n <= 26) 
+        return String.fromCharCode(n + 64);
+        
+        const stack = [];
+        
+        while ( n > 0) {
+            stack.push(String.fromCharCode(((n-1) % 26) + 65));
+            n = Math.floor((n-1) / 26);
+        }
+        
+        let res = "";
+        while (stack.length) 
+            res += stack.pop();
+            
+        return res;    
+    }
+}
