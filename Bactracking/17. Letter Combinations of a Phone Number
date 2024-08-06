@@ -1,0 +1,75 @@
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function(digits) {
+    const n = digits.length;
+
+    const button_map = { 0:"", 1: "",
+        2 : "abc", 3 :"def", 4 : "ghi", 
+        5 : "jkl", 6: "mno", 7 : "pqrs",
+        8:"tuv", 9: "wxyz"
+    }
+
+    if (n === 0) return [];
+
+    if (n === 1) return [...button_map[digits[0]]];
+
+    let combinations = [""];
+    
+    for (const digit of digits) {
+        const new_combinations = [];
+        for (const comb of combinations)
+            for (const letter of button_map[digit]) 
+                new_combinations.push(comb + letter);
+
+        combinations = new_combinations;        
+    }
+
+    return combinations;
+};
+
+TIME COMPLEXITY -->> O(4 ^ N) -> N = LENGTH OF DIGIT STRING
+SPACE COMPLEXITY -- > O(M * 4 ^ N) -> M = LENGTH OF EACH COMBINATION STRING
+
+                                                               -----------------------------------
+
+
+BACKTRACKING APPROACH
+
+var backtrack = function(comb, digit, i, n, combinations, button_map) {
+    if (i >= n) {
+        combinations.push(comb);
+        return;
+    }
+
+    for (const letter of button_map[digit[i]]){
+        backtrack(comb + letter, digit, i+1, n, combinations, button_map)
+    }
+}
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function(digits) {
+    const n = digits.length;
+
+    const button_map = { 0:"", 1: "",
+        2 : "abc", 3 :"def", 4 : "ghi", 
+        5 : "jkl", 6: "mno", 7 : "pqrs",
+        8:"tuv", 9: "wxyz"
+    }
+
+    if (n === 0) return [];
+    if (n === 1) return [...button_map[digits[0]]];
+
+    const combinations = [];
+    backtrack("", digits,0, n, combinations, button_map);
+
+    return combinations;
+};
+
+TIME COMPLEXITY -->> O(4 ^ N) -> N = LENGTH OF DIGIT STRING
+SPACE COMPLEXITY -- > O(M * 4 ^ N) + O(N)  -> M = LENGTH OF EACH COMBINATION STRING, O(N) FOR RECURSION STACK
+
+                                                               -----------------------------------
