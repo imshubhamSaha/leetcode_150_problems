@@ -1,0 +1,90 @@
+/**
+ * @param {number[]} arr
+ * @param {number} n
+ * @return {number}
+ */
+class Solution {
+    maxIndexDiff(arr,n) {
+        let maxIdx = 0;
+        
+        for (let i = 0; i < n-1; i++) {
+            for (let j = i + 1; j < n; j++) {
+                if (arr[i] <= arr[j]) maxIdx = Math.max(maxIdx, j-i);
+            }
+        }
+        
+        return maxIdx;
+    }
+}
+Time Complexity -- > O(n * n)
+Space complexity -- > constant
+
+--------------------------------
+
+class Solution {
+    maxIndexDiff(arr,n) {
+        let maxIdx = 0;
+        const maxArr = new Array(n).fill(0);
+        maxArr[n-1] = arr[n-1];
+        
+        for (let i = n - 2; i >= 0; i--) 
+            maxArr[i] = Math.max(arr[i], maxArr[i+1]);
+            
+        for (let i = 0; i < n - 1; i++) {
+            let low = i + 1, high = n - 1;
+            let j = i;
+            while (low <= high) {
+                let mid = (low + high) >> 1;
+                
+                if (maxArr[mid] >= arr[i]) {
+                    j = mid;
+                    low = mid + 1;
+                }else high = mid - 1;
+            }
+            
+            maxIdx = Math.max(maxIdx, (j - i));
+        }
+        
+        return maxIdx;
+    }
+}
+
+Time Complexity -- > O(nlogn)
+Space complexity -- > O(n)
+
+--------------------------------
+
+
+/**
+ * @param {number[]} arr
+ * @param {number} n
+ * @return {number}
+ */
+class Solution {
+    maxIndexDiff(arr,n) {
+        let maxIdx = 0;
+        const stack = [];
+        let i = 0;
+        
+        while ( i < n) {
+            if (!stack.length || arr[stack[stack.length-1]] > arr[i]) 
+                stack.push(i);
+            i++;    
+        }
+        
+        i = n - 1;
+        
+        while (i >= 0 && stack.length) {
+            if (arr[i] >= arr[stack[stack.length-1]]) {
+                maxIdx = Math.max(maxIdx, (i - stack.pop()));
+            }else i--;
+        }
+        
+        return maxIdx;
+    }
+}
+
+Time Complexity -- > O(n)
+Space complexity -- > O(n)
+
+--------------------------------
