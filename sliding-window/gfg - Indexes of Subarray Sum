@@ -1,0 +1,20 @@
+class Solution {
+    // Function to find a continuous sub-array which adds up to a given number.
+    subarraySum(arr, n, s) {
+        let runningSum = 0;
+        let i = 0, j = 0;
+        
+        while(j < n) {
+            runningSum += arr[j];
+            
+            while (runningSum > s && i < j) {
+                runningSum -= arr[i];
+                i++;
+            }
+            if (runningSum === s) return [i+1, j + 1];
+            j++;
+        }
+        
+        return [-1];
+    }
+}
