@@ -1,0 +1,75 @@
+/**
+ * @param {number[]} nums
+ * @returns {number}
+*/
+class Solution
+{
+    //Function to find the minimum number of swaps required to sort the array.
+	minSwaps(arr)
+	{
+		const n = arr.length;
+		
+		let swaps = 0;
+		
+		for (let i = 0; i < n-1; i++) {
+		    let smallest = arr[i];
+		    let idx = i;
+		    for (let j = i + 1; j < n; j++) {
+		        if (arr[j] < smallest) {
+		            smallest = arr[j];
+		            idx = j;
+		        }
+		    }
+		    
+		    if (smallest !== arr[i]) {
+		        let temp = arr[i];
+		        arr[i] = arr[idx];
+		        arr[idx] = temp;
+		        swaps++;
+		    }
+		}
+		
+		return swaps;
+	}
+}
+
+Time Complexity --> O(n * n)
+Space --> constant
+
+----------------
+
+/**
+ * @param {number[]} nums
+ * @returns {number}
+*/
+class Solution
+{
+    //Function to find the minimum number of swaps required to sort the array.
+	minSwaps(arr)
+	{
+		const n = arr.length;
+		
+		let swaps = 0;
+		const hashed = arr.reduce((acc, curr, idx) => {
+		    acc[curr] = idx
+		    return acc;
+		}, {});
+		
+		arr.sort((a,b) => a - b);
+		
+		for (let i = 0; i < n; i++) {
+		    let idx = hashed[arr[i]];
+		    if(i !== idx) {
+		        let tmp = arr[idx];
+		        arr[idx] = arr[i];
+		        arr[i] = tmp;
+		        i--;
+		        swaps++;
+		    }
+		}
+		return swaps;
+	}
+}
+
+Time Complexity --> O(n) + O(nlogn) + O(n) ~ O(nlogn)
+Space --> O(n) + (logn) ~ O(n)
