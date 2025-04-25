@@ -1,0 +1,15 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        mpp = {}
+        mpp[0] = 1
+        running_sum = 0
+        result = 0
+        for num in nums :
+            running_sum += num
+            req_sum = running_sum - k
+
+            result += mpp.get(req_sum, 0)
+            mpp[running_sum] = mpp.get(running_sum, 0) + 1
+
+        return result
