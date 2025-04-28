@@ -1,0 +1,16 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        mpp = {}
+        mpp[0] = 1
+        result = 0
+        prefix_sum = 0
+
+        for num in nums :
+            prefix_sum += num
+            required_sum = prefix_sum - k
+
+            result += mpp.get(required_sum, 0)
+            mpp[prefix_sum] = mpp.get(prefix_sum, 0) + 1
+        
+        return result
